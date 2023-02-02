@@ -1,6 +1,6 @@
 const TodoList = () => {
 	return (
-		<div className="todo-list">
+		<div>
 			<ul>
 				<li>First task</li>
 				<li>Second tack</li>
