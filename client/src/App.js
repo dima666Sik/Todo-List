@@ -2,6 +2,8 @@ import AppHeader from "./components/AppHeader";
 import SearchPanel from "./components/SearchPanel";
 import TodoList from "./components/TodoList";
 
+import "./style/App.css";
+
 const App = () => {
 	const todoList = [
 		{ label: "First task", important: false, id: 1 },
@@ -15,7 +17,7 @@ const App = () => {
 	];
 
 	return (
-		<div>
+		<div className="app-todo-list">
 			<AppHeader />
 			<SearchPanel />
 			<TodoList todoList={todoList} />
