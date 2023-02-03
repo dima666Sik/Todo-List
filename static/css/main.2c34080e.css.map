@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.2c34080e.css","mappings":"AAAA,eAGC,aAAc,CADd,eAAgB,CADhB,gBAGD","sources":["style/App.css"],"sourcesContent":[".app-todo-list {\r\n\tpadding-top: 10em;\r\n\tmax-width: 500px;\r\n\tmargin: 0 auto;\r\n}\r\n"],"names":[],"sourceRoot":""}
