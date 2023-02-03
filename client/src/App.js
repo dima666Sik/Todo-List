@@ -1,23 +1,8 @@
-const TodoList = () => {
-	return (
-		<div>
-			<ul>
-				<li>First task</li>
-				<li>Second tack</li>
-			</ul>
-		</div>
-	);
-};
+import AppHeader from "./components/AppHeader";
+import SearchPanel from "./components/SearchPanel";
+import TodoList from "./components/TodoList";
 
-const AppHeader = () => {
-	return <h1>Todo List</h1>;
-};
-
-const SearchPanel = () => {
-	return <input placeholder="search" />;
-};
-
-export default function App() {
+const App = () => {
 	return (
 		<div>
 			<AppHeader />
@@ -25,4 +10,6 @@ export default function App() {
 			<TodoList />
 		</div>
 	);
-}
+};
+
+export default App;
