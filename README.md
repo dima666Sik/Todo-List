@@ -2,7 +2,7 @@
 
 ## Preview from dima-coder =)!
 
-This project use html 5, jsx, ReactJs.
+This project use html 5, css, ReactJs, Bootstrap 5.
 
 ## Demo
 
