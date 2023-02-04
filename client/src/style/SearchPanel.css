@@ -1,0 +1,8 @@
+.search-panel {
+	margin-bottom: 15px;
+}
+
+.search-input {
+	flex-grow: 1;
+	margin-right: 5px;
+}

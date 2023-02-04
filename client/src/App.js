@@ -1,4 +1,5 @@
 import AppHeader from "./components/AppHeader";
+import ItemAddTask from "./components/ItemAddTask";
 import SearchPanel from "./components/SearchPanel";
 import TodoList from "./components/TodoList";
 
@@ -18,9 +19,10 @@ const App = () => {
 
 	return (
 		<div className="app-todo-list">
-			<AppHeader />
+			<AppHeader toDo={3} done={5} />
 			<SearchPanel />
 			<TodoList todoList={todoList} />
+			<ItemAddTask />
 		</div>
 	);
 };
