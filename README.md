@@ -13,5 +13,5 @@ You can check my work by clicking on this link: https://dima666sik.github.io/Tod
 ☑️ Mark tasks as completed or cancel this action
 <br>❌ Add task
 <br>❌ Delete task
-<br>❌ Mark tasks as active or cancel this action
+<br>❌ Mark tasks as important or cancel this action
 <br>❌ Search for the desired task

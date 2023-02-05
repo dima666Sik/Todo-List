@@ -15,7 +15,7 @@ export default class TodoListItem extends Component {
 	};
 
 	render() {
-		const { label, important = false } = this.props;
+		const { label, important } = this.props;
 		let classNameSpanLabels = `todo-list-item d-flex`;
 		const { done } = this.state;
 
