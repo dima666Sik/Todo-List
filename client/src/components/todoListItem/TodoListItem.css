@@ -1,5 +1,8 @@
 .todo-list-item {
 	justify-content: space-between;
+}
+
+.todo-list-item {
 	font-size: 1.25rem;
 }
 
@@ -21,6 +24,5 @@
 
 .todo-list-item.important .todo-list-item-label {
 	font-weight: bold;
-	font-style: italic;
-	color: #43bbcb;
+	color: steelblue;
 }

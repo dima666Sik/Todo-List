@@ -4,7 +4,6 @@ import "./TodoListItem.css";
 export default class TodoListItem extends Component {
 	state = {
 		done: false,
-		important: this.props.important === false ? false : true,
 	};
 
 	onLabelClick = () => {
@@ -15,40 +14,31 @@ export default class TodoListItem extends Component {
 		}
 	};
 
-	onBtnMarkImportantClick = () => {
-		if (!this.state.important) {
-			this.setState({ important: true });
-		} else {
-			this.setState({ important: false });
-		}
-	};
-
 	render() {
-		const { label } = this.props;
+		const { label, important } = this.props;
 		let classNameSpanLabels = `todo-list-item d-flex`;
-
 		const { done } = this.state;
-		const { important } = this.state;
 
 		if (done) {
 			classNameSpanLabels += " done";
 		}
-		if (important) {
-			classNameSpanLabels += " important";
-		}
+
+		const styleSpan = {
+			color: important ? "red" : "black",
+		};
 
 		return (
 			<span className={classNameSpanLabels}>
-				<span className="todo-list-item-label" onClick={this.onLabelClick}>
+				<span
+					style={styleSpan}
+					className="todo-list-item-label"
+					onClick={this.onLabelClick}
+				>
 					{label}
 				</span>
 
 				<div className="gap-2 d-flex">
-					<button
-						type="button"
-						className="btn btn-outline-success btn-sm"
-						onClick={this.onBtnMarkImportantClick}
-					>
+					<button type="button" className="btn btn-outline-success btn-sm">
 						<i className="fa fa-exclamation" />
 					</button>
 
