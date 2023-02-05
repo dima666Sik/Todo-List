@@ -11,7 +11,7 @@ You can check my work by clicking on this link: https://dima666sik.github.io/Tod
 ## Features
 
 ☑️ Mark tasks as completed or cancel this action
-❌ Add task
-❌ Delete task
-❌ Mark tasks as active or cancel this action
-❌ Search for the desired task
+<br>❌ Add task
+<br>❌ Delete task
+<br>❌ Mark tasks as active or cancel this action
+<br>❌ Search for the desired task
