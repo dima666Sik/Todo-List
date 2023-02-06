@@ -1,5 +1,12 @@
 .app-todo-list {
-	padding-top: 5em;
 	max-width: 500px;
 	margin: 0 auto;
+	border: 1px solid grey;
+	padding: 1.5em;
+	background: rgb(240, 240, 240);
+	border-radius: 1.5em;
+}
+
+.app-todo-list-container {
+	margin-top: 2.5em;
 }

@@ -8,10 +8,10 @@ export default class ButtonGroup extends Component {
 				<button type="button" className="btn btn-info">
 					All
 				</button>
-				<button type="button" className="btn btn-outline-secondary">
+				<button type="button" className="btn btn-outline-secondary btn-light">
 					Active
 				</button>
-				<button type="button" className="btn btn-outline-secondary">
+				<button type="button" className="btn btn-outline-secondary btn-light">
 					Done
 				</button>
 			</div>
