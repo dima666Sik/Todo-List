@@ -20,10 +20,9 @@ export default class TodoListItem extends Component {
 	};
 
 	render() {
-		const { label } = this.props;
+		const { label, onDeleted } = this.props;
 		let classNameSpanLabels = `todo-list-item d-flex`;
-		const { done } = this.state;
-		const { important } = this.state;
+		const { done, important } = this.state;
 
 		if (done) {
 			classNameSpanLabels += " done";
@@ -48,7 +47,11 @@ export default class TodoListItem extends Component {
 						<i className="fa fa-exclamation" />
 					</button>
 
-					<button type="button" className="btn btn-outline-danger btn-sm">
+					<button
+						type="button"
+						className="btn btn-outline-danger btn-sm"
+						onClick={onDeleted}
+					>
 						<i className="fa fa-trash-o" />
 					</button>
 				</div>
