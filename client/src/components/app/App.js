@@ -32,6 +32,30 @@ export default class App extends Component {
 		});
 	};
 
+	onAdd = (text) => {
+		this.setState(({ todoList }) => {
+			let createIdForNewItem = todoList.reduce((prev, cur) => {
+				if (prev.b > cur.b) {
+					return prev.id;
+				}
+				return cur.id;
+			});
+
+			const newArrayWithAddItem = [
+				...todoList,
+				{
+					label: text,
+					important: false,
+					done: false,
+					id: ++createIdForNewItem,
+				},
+			];
+			return {
+				todoList: newArrayWithAddItem,
+			};
+		});
+	};
+
 	render() {
 		return (
 			<div className="app-todo-list-container">
@@ -42,7 +66,7 @@ export default class App extends Component {
 						todoList={this.state.todoList}
 						onDeleted={this.onDeleteItem}
 					/>
-					<ItemAddTask />
+					<ItemAddTask onAdded={this.onAdd} />
 				</div>
 			</div>
 		);
