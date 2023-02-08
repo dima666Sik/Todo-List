@@ -6,18 +6,27 @@ import TodoList from "../todoList";
 import { Component } from "react";
 
 export default class App extends Component {
+	minId = 0;
+
 	state = {
 		todoList: [
-			{ label: "First task", important: false, done: false, id: 1 },
-			{ label: "Second task", important: false, done: false, id: 2 },
-			{ label: "Third task", important: true, done: false, id: 3 },
-			{ label: "Forth task", important: false, done: false, id: 4 },
-			{ label: "Fifth task", important: false, done: false, id: 5 },
-			{ label: "Sixth task", important: false, done: false, id: 6 },
-			{ label: "Seventh task", important: false, done: false, id: 7 },
-			{ label: "Eighth task", important: false, done: false, id: 8 },
+			this.onCreateItem("First task"),
+			this.onCreateItem("Second task"),
+			this.onCreateItem("Third task"),
+			this.onCreateItem("Forth task"),
+			this.onCreateItem("Fifth task"),
+			this.onCreateItem("Sixth task"),
 		],
 	};
+
+	onCreateItem(label) {
+		return {
+			label,
+			important: false,
+			done: false,
+			id: ++this.minId,
+		};
+	}
 
 	onDeleteItem = (id) => {
 		this.setState(({ todoList }) => {
@@ -34,37 +43,64 @@ export default class App extends Component {
 
 	onAdd = (text) => {
 		this.setState(({ todoList }) => {
-			let createIdForNewItem = todoList.reduce((prev, cur) => {
-				if (prev.b > cur.b) {
-					return prev.id;
-				}
-				return cur.id;
-			});
-
-			const newArrayWithAddItem = [
-				...todoList,
-				{
-					label: text,
-					important: false,
-					done: false,
-					id: ++createIdForNewItem,
-				},
-			];
+			const newArrayWithAddItem = [...todoList, this.onCreateItem(text)];
 			return {
 				todoList: newArrayWithAddItem,
 			};
 		});
 	};
 
+	onToggleUpdateProps(array, id, prop) {
+		const index = array.findIndex((element) => element.id === id);
+		const oldItem = array[index];
+		const updateItem = { ...oldItem, [prop]: !oldItem[prop] };
+
+		return [...array.slice(0, index), updateItem, ...array.slice(index + 1)];
+	}
+
+	onToggleImportant = (id) => {
+		console.log("Toggle important");
+		this.setState(({ todoList }) => {
+			return {
+				todoList: this.onToggleUpdateProps(todoList, id, "important"),
+			};
+		});
+	};
+
+	onToggleDone = (id) => {
+		console.log("Toggle done");
+		this.setState(({ todoList }) => {
+			return {
+				todoList: this.onToggleUpdateProps(todoList, id, "done"),
+			};
+		});
+	};
+
+	countValuesIntoTasks(prop) {
+		return this.state.todoList
+			.map((task) => task[prop])
+			.reduce((prev, curr) => (curr ? ++prev : prev), 0);
+	}
+
+	countToDoTasks() {
+		return this.state.todoList.length - this.countValuesIntoTasks("done");
+	}
+
 	render() {
 		return (
 			<div className="app-todo-list-container">
 				<div className="app-todo-list">
-					<AppHeader toDo={3} done={5} />
+					<AppHeader
+						toDo={this.countToDoTasks()}
+						done={this.countValuesIntoTasks("done")}
+						importantTask={this.countValuesIntoTasks("important")}
+					/>
 					<SearchPanel />
 					<TodoList
 						todoList={this.state.todoList}
 						onDeleted={this.onDeleteItem}
+						onToggleImportant={this.onToggleImportant}
+						onToggleDone={this.onToggleDone}
 					/>
 					<ItemAddTask onAdded={this.onAdd} />
 				</div>
