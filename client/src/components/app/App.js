@@ -17,6 +17,8 @@ export default class App extends Component {
 			this.onCreateItem("Fifth task"),
 			this.onCreateItem("Sixth task"),
 		],
+		filter: "all",
+		search: "",
 	};
 
 	onCreateItem(label) {
@@ -76,28 +78,87 @@ export default class App extends Component {
 		});
 	};
 
-	countValuesIntoTasks(prop) {
+	countValuesIntoTasksDone() {
 		return this.state.todoList
-			.map((task) => task[prop])
+			.map((task) => task.done)
+			.reduce((prev, curr) => (curr ? ++prev : prev), 0);
+	}
+
+	countValuesIntoTasksActivityImportant() {
+		return this.state.todoList
+			.map((task) => !task.done && task.important)
 			.reduce((prev, curr) => (curr ? ++prev : prev), 0);
 	}
 
 	countToDoTasks() {
-		return this.state.todoList.length - this.countValuesIntoTasks("done");
+		return this.state.todoList.length - this.countValuesIntoTasksDone();
 	}
 
+	filterItems(tasks, filter) {
+		console.log("filterItems " + filter);
+		if (filter === "all") {
+			return tasks;
+		} else if (filter === "active") {
+			return tasks.filter((task) => !task.done);
+		} else if (filter === "done") {
+			return tasks.filter((task) => task.done);
+		} else if (filter === "important") {
+			return tasks.filter((task) => !task.done && task.important);
+		}
+	}
+
+	onSearchTask(tasks, search) {
+		console.log("onSearchTask" + search);
+		if (search.length === 0) {
+			return tasks;
+		}
+
+		return tasks.filter((task) => {
+			return task.label.toLowerCase().indexOf(search.toLowerCase()) > -1;
+		});
+	}
+
+	searchSeekTask(array, text) {
+		return array.filter((el) => el.label.includes(text));
+	}
+
+	onFilterChange = (filter) => {
+		console.log(filter);
+		this.setState({ filter });
+	};
+
+	onSearchChange = (search) => {
+		console.log(search);
+		this.setState({ search });
+	};
+
+	onShowAll = () => {};
+
 	render() {
+		const { todoList, filter, search } = this.state;
+
+		const visibleItems = this.onSearchTask(
+			this.filterItems(todoList, filter),
+			search
+		);
+
 		return (
 			<div className="app-todo-list-container">
 				<div className="app-todo-list">
 					<AppHeader
 						toDo={this.countToDoTasks()}
-						done={this.countValuesIntoTasks("done")}
-						importantTask={this.countValuesIntoTasks("important")}
+						done={this.countValuesIntoTasksDone()}
+						importantTask={this.countValuesIntoTasksActivityImportant()}
 					/>
-					<SearchPanel />
+					<SearchPanel
+						onSearchTask={this.onSearchChange}
+						onShowAll={this.onFilterChange}
+						onShowAllDone={this.onFilterChange}
+						onShowAllActivity={this.onFilterChange}
+						onShowAllActivityImportant={this.onFilterChange}
+					/>
 					<TodoList
-						todoList={this.state.todoList}
+						todoList={visibleItems}
 						onDeleted={this.onDeleteItem}
 						onToggleImportant={this.onToggleImportant}
 						onToggleDone={this.onToggleDone}

@@ -13,6 +13,10 @@ export default class ItemAddTask extends Component {
 	onSubmit = (event) => {
 		event.preventDefault();
 		this.props.onAdded(this.state.label);
+		// clear form
+		this.setState({
+			label: "",
+		});
 	};
 
 	render() {
@@ -23,6 +27,7 @@ export default class ItemAddTask extends Component {
 					className="form-control new-todo-label"
 					placeholder="What the task you want to add?"
 					onChange={this.onLabelChange}
+					value={this.state.label}
 				/>
 
 				<button type="submit" className="btn btn-outline-secondary btn-light">

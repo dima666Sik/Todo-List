@@ -1,8 +1,10 @@
 .search-panel {
 	margin-bottom: 15px;
+	flex-direction: column;
 }
 
 .search-input {
 	flex-grow: 1;
 	margin-right: 5px;
+	margin-bottom: 5px;
 }
